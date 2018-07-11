@@ -1,11 +1,11 @@
 require './lib/failure_suggester.rb'
 
 class LineBreaker
-  def initialize(file_name:, line_number:, contents: )
+  def initialize(file_path:, line_number:, contents: )
     @contents = contents.split("\n")
     @line_number = line_number - 1
     @old_line = line
-    @file_name = file_name
+    @file_path = file_path
   end
 
   def break_line!
@@ -19,7 +19,7 @@ class LineBreaker
   end
 
   def write_file!
-    File.write(@file_name, @contents.join("\n"))
+    File.write(@file_path, @contents.join("\n"))
   end
 
   def report

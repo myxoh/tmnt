@@ -1,7 +1,7 @@
 require './lib/line_breaker.rb'
 
 describe LineBreaker do
-  subject(:line_breaker) { described_class.new(file_name: file, line_number: line_number, contents: contents) }
+  subject(:line_breaker) { described_class.new(file_path: file, line_number: line_number, contents: contents) }
   let(:file) { 'spec/example/lib/production.rb' }
   let(:line_number) { 3 }
   let(:contents) { File.read(file) }
