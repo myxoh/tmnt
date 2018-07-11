@@ -11,10 +11,19 @@ describe FailureSuggester do
         expect(suggested_failure).to match(/CONSTANT = .+/)
       end
     end
+
+    context "when the line contains a comparison" do
+      let(:line) { "bananas > oranges" }
+      it "suggests to modify the constant value" do
+        expect(suggested_failure).not_to eq line
+        expect(suggested_failure).to match(/bananas (<|<=|==|!=|>=) orange/)
+      end
+    end
   end
 
   describe "#detect_breakable_boundries" do
     subject(:detect) { FailureSuggester.new(line).send(:detect_breakable_boundries) }
+
     context "when the line contains a constant" do
       let(:line) { "CONSTANT = 3" }
       it "detects the columns that can be replaced safely" do
